@@ -10,6 +10,9 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
+# roo for reading excel sheets
+gem 'roo'
+
 gem "pg", :group => :production
 
 gem 'mysql2', :group => :development
@@ -50,4 +53,4 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]

@@ -1,0 +1,27 @@
+<h2>Welcome <%= current_user.full_name %></h2>
+
+<h3>Links</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <td><%= link.title %></td>
+        <td><%= link_to link.url, link.url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user.teacher? %>
+  <%= link_to 'Import Links', new_link_path, class: 'btn btn-success' %>
+<% end %>
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-warning' %>

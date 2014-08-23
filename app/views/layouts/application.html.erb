@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>STT</title>
+  <title>Link Tracker</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="container">
+	<% flash.each do |name, msg| %>
+		<% if flash[:notice] %>
+    	<%= content_tag :div, msg, class: "alert alert-info centered" %>
+		<% else %>
+    	<%= content_tag :div, msg, class: "alert alert-warning centered" %>
+		<% end %>
+  <% end %>
 	<%= yield %>
 </div>
 
 </body>
 </html>
+
+<script type="text/javascript">
+	window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+	}, 5000);
+</script>
