@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates :position, presence: true
   validates_inclusion_of :position, in: %w( Teacher Student ), message: "%{value} is not valid position"
 
+  has_many :link_tracks
+
   def full_name
   	"#{self.first_name} #{self.last_name}"
   end

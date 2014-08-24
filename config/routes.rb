@@ -2,6 +2,7 @@ STT::Application.routes.draw do
 
   root 'links#index'
   devise_for :users
+  get  'track_link' => 'link_track#track_link'
   resources :links do
     collection { post :import }
   end
