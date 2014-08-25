@@ -12,7 +12,7 @@ class LinkTrackController < ApplicationController
       redirect_to root_url, notice: "Only Teachers can see logs" 
       return
     end
-    @link_tracks = LinkTrack.distinct_user_link_tracks.order('created_at DESC')
+    @link_tracks = LinkTrack.distinct_user_link_tracks
     @users   = User.all.order('created_at DESC')
   end
 
