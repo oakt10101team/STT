@@ -7,6 +7,15 @@ class LinkTrackController < ApplicationController
     render nothing: true, status: 200
   end
 
+  def index
+    if not current_user.teacher?
+      redirect_to root_url, notice: "Only Teachers can see logs" 
+      return
+    end
+    @link_tracks = LinkTrack.distinct_user_link_tracks
+    @users   = User.all
+  end
+
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.

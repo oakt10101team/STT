@@ -23,5 +23,6 @@
 <br>
 <% if current_user.teacher? %>
   <%= link_to 'Import Links', new_link_path, class: 'btn btn-success' %>
+  <%= link_to 'Link Tracks', track_log_path, class: 'btn btn-success' %>
 <% end %>
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-warning' %>

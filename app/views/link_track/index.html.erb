@@ -1,0 +1,50 @@
+<h3>Links Track Log</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+    	<th>User Name</th>
+      <th>Link Title</th>
+      <th>Url</th>
+      <th>Clicked at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @link_tracks.each do |link_track| %>
+      <tr>
+      	<td><%= link_track.user.full_name %></td>
+        <td><%= link_track.link.title %></td>
+        <td><%= link_to link_track.link.url, link_track.link.url, target: '_blank', class: "track-link", "data-link-id" => link_track.link.id %></td>
+        <td><%= "#{time_ago_in_words(link_track.link.created_at)} ago" %></td>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>User Log</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+    	<th>User Name</th>
+      <th>Last Signed In at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+      	<td><%= user.full_name %></td>
+        <td><%= "#{time_ago_in_words(user.last_sign_in_at)} ago" %></td>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user.teacher? %>
+  <%= link_to 'Import Links', new_link_path, class: 'btn btn-success' %>
+  <%= link_to 'Links', links_path, class: 'btn btn-success' %>
+<% end %>
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-warning' %>
