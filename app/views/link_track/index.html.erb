@@ -26,8 +26,8 @@
           <tr>
           	<td><%= link_track.user.full_name %></td>
             <td><%= link_track.link.title %></td>
-            <td><%= link_to link_track.link.url, link_track.link.url, target: '_blank', class: "track-link", "data-link-id" => link_track.link.id %></td>
-            <td><%= "#{time_ago_in_words(link_track.link.created_at)} ago" %></td>       
+            <td><%= link_to link_track.link.url, link_track.link.url, target: '_blank' %></td>
+            <td><%= "#{time_ago_in_words(link_track.created_at)} ago" %></td>       
           </tr>
         <% end %>
       </tbody>

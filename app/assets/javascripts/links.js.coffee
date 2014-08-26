@@ -7,7 +7,7 @@ window.setTimeout ->
 , 5000
 
 $ ->
-	$('.track-link').on 'click', (e) ->
+	$(document.body).on 'click', '.track-link', (e) ->
 		url = @href
 		console.log ('dsds')
 		link_id = $(this).data('link-id')

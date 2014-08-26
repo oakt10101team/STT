@@ -14,7 +14,7 @@ class LinkTrackController < ApplicationController
       redirect_to root_url, notice: "Only Administrators can see logs" 
       return
     end
-    @link_tracks = LinkTrack.includes(:user, :link).order('created_at DESC').page(params[:tracks_page]).per(5)
+    @link_tracks = LinkTrack.order('link_tracks.created_at DESC').includes(:user, :link).page(params[:tracks_page]).per(5)
     @users   = User.all.order('last_sign_in_at DESC').page(params[:user_page]).per(5)
   end
 
