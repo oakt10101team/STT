@@ -13,6 +13,9 @@ gem 'autoprefixer-rails'
 # roo for reading excel sheets
 gem 'roo'
 
+# kaminari for pagination
+gem 'kaminari'
+
 gem "pg", :group => :production
 
 gem 'mysql2', :group => :development

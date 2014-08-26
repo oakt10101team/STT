@@ -2,18 +2,20 @@ class LinkTrackController < ApplicationController
   before_action :authenticate_user!
 
   def track_link
-    current_user.link_tracks.create(link_id: params[:link_id])
+    if params[:link_id].present?      
+      current_user.link_tracks.create(link_id: params[:link_id])
+    end
 
     render nothing: true, status: 200
   end
 
   def index
-    if not current_user.teacher?
-      redirect_to root_url, notice: "Only Teachers can see logs" 
+    if not current_user.administrator?
+      redirect_to root_url, notice: "Only Administrators can see logs" 
       return
     end
-    @link_tracks = LinkTrack.distinct_user_link_tracks
-    @users   = User.all.order('created_at DESC')
+    @link_tracks = LinkTrack.includes(:user, :link).order('created_at DESC').page(params[:tracks_page]).per(5)
+    @users   = User.all.order('last_sign_in_at DESC').page(params[:user_page]).per(5)
   end
 
 

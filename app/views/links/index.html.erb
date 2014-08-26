@@ -1,28 +1,36 @@
-<h2>Welcome <%= current_user.full_name %></h2>
+<div class="pull-right" style="margin: 10px;">
+  <% if current_user.administrator? %>
+    <%= link_to 'Import Links', new_link_path, class: 'btn btn-success' %>
+    <%= link_to 'Link Tracks', track_log_path, class: 'btn btn-success' %>
+  <% end %>
+  <%= link_to "Sign Out #{current_user.full_name}", destroy_user_session_path, method: :delete, class: 'btn btn-warning' %>
+</div>
 
-<h3>Links</h3>
+<div class="clearfix"></div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-    </tr>
-  </thead>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Links</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Url</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @links.each do |link| %>
-      <tr>
-        <td><%= link.title %></td>
-        <td><%= link_to link.url, link.url, target: '_blank', class: "track-link", "data-link-id" => link.id %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @links.each do |link| %>
+          <tr>
+            <td><%= link.title %></td>
+            <td><%= link_to link.url, link.url, target: '_blank', class: "track-link", "data-link-id" => link.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @links, :param_name => 'page' %>
+  </div>
+</div>
 
-<br>
-<% if current_user.teacher? %>
-  <%= link_to 'Import Links', new_link_path, class: 'btn btn-success' %>
-  <%= link_to 'Link Tracks', track_log_path, class: 'btn btn-success' %>
-<% end %>
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-warning' %>

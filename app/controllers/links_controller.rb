@@ -2,16 +2,20 @@ class LinksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @links = Link.all
+    @links = Link.all.page(params[:page]).per(10)
   end
 
   def import
-    Link.import(params[:file])
-    redirect_to root_url, notice: "Links successfully imported."
+    if params[:file].present?
+      Link.import(params[:file])
+      redirect_to root_url, notice: "Links successfully imported."
+    else
+      redirect_to new_link_path, alert: "No file selected."
+    end
   end
   
   def new
-    redirect_to root_url, notice: "Only Teachers can import links" unless current_user.teacher?
+    redirect_to root_url, notice: "Only Administrators can import links" unless current_user.administrator?
   end
 
 
