@@ -18,6 +18,15 @@ class LinksController < ApplicationController
     redirect_to root_url, notice: "Only Administrators can import links" unless current_user.administrator?
   end
 
+  def destroy
+    if current_user.administrator?
+      Link.find(params[:id]).destroy
+      redirect_to root_url, :flash => { :success => "Link destroyed." }
+    else
+      redirect_to root_url, notice: "Only Administrators can delete links"
+    end
+  end
+
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.

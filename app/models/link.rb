@@ -1,4 +1,7 @@
 class Link < ActiveRecord::Base
+
+	has_many :link_tracks, dependent: :destroy
+
 	def self.import(file)
 	  spreadsheet = open_spreadsheet(file)
 	  header = spreadsheet.row(1)

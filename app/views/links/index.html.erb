@@ -18,6 +18,9 @@
         <tr>
           <th>Title</th>
           <th>Url</th>
+          <% if current_user.administrator? %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -26,6 +29,9 @@
           <tr>
             <td><%= link.title %></td>
             <td><%= link_to link.url, link.url, target: '_blank', class: "track-link", "data-link-id" => link.id %></td>
+            <% if current_user.administrator? %>
+              <td><%= link_to "Delete", link_path(link), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
